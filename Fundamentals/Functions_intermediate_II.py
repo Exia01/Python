@@ -1,8 +1,8 @@
 # students = [
-#     {'first_name':  'Michael', 'last_name': 'Jordan'},
-#     {'first_name': 'John', 'last_name': 'Rosales'},
-#     {'first_name': 'Mark', 'last_name': 'Guillen'},
-#     {'first_name': 'KB', 'last_name': 'Tonel'}
+#     {"first_name":  "Michael", "last_name": "Jordan"},
+#     {"first_name": "John", "last_name": "Rosales"},
+#     {"first_name": "Mark", "last_name": "Guillen"},
+#     {"first_name": "KB", "last_name": "Tonel"}
 # ]
 # # should output this
 # # Michael Jordan
@@ -13,32 +13,32 @@
 
 # def printstudent():
 #     for i in students:
-#         print(i['first_name'], i['last_name'])
+#         print(i["first_name"], i["last_name"])
 
 
 # printstudent()
 
 users = {
-    'Students': [
-        {'first_name':  'Michael', 'last_name': 'Jordan'},
-        {'first_name': 'John', 'last_name': 'Rosales'},
-        {'first_name': 'Mark', 'last_name': 'Guillen'},
-        {'first_name': 'KB', 'last_name': 'Tonel'}
+    "Students": [
+        {"first_name":  "Michael", "last_name": "Jordan"},
+        {"first_name": "John", "last_name": "Rosales"},
+        {"first_name": "Mark", "last_name": "Guillen"},
+        {"first_name": "KB", "last_name": "Tonel"}
     ],
-    'Instructors': [
-        {'first_name': 'Michael', 'last_name': 'Choi'},
-        {'first_name': 'Martin', 'last_name': 'Puryear'}
+    "Instructors": [
+        {"first_name": "Michael", "last_name": "Choi"},
+        {"first_name": "Martin", "last_name": "Puryear"}
     ]
 }
 
 for i in users:
-    # print(i)
-    # print(len(users[i]))
-    for j in range(len(users[i])):
-        print(users[i][j]['first_name'] + ' ' + users[i][j]['last_name'])
-
-    # for j in range(len(users[i])):
-    #     name = users[i][j]['first_name'] + ' ' + users[i][j]['last_name']
-    #     leng = len(name)
-    #     print((len(name)))
-        # print(j + 1, '-', name, '-', leng)
+    print(i)
+    for b in range(len(users[i])):
+        # print(+ users[i][b]["first_name"] + " " + users[i][b]["last_name"])
+        names = users[i][b]["first_name"] + "" + users[i][b]["last_name"]
+        total = len(names)
+        # print((len(names)))
+        # print((len(users[i][b]["first_name"]), + b+1))
+        # print((len(users[i][b]["first_name"]), + total))
+        # print(b + 1, "-", names, "-", total)
+        print(b+1, "-", names, "-",  total)
