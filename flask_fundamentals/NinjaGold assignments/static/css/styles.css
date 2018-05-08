@@ -1,0 +1,52 @@
+* {
+  margin: 0 auto;
+}
+
+#wrapper {
+  background-color: lightskyblue;
+}
+
+.main {
+  background-color: coral;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  display: flex;
+}
+.boxes {
+  width: 75%;
+  justify-content: space-between;
+  display: flex;
+}
+.box {
+  border: black solid 2px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 200px;
+}
+
+.boxes p {
+  display: flex;
+}
+
+#bottom {
+  height: 250px;
+  width: 100%;
+  border: 1px solid black;
+  height: 300px;
+  padding: 5px;
+}
+
+#bottom form {
+}
+.bottom p {
+  margin: 0;
+}
+.green {
+  color: green;
+}
+.red{
+  color: red;
+}

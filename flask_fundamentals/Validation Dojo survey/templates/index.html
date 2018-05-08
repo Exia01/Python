@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Survey page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <script src="main.js"></script>
+</head>
+
+<body>
+
+    <div class="form-group">
+        <h1>Dojo Survey</h1>
+        <h2>Now with checks and balances... or validators that's cool too.</h2>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div class="error">{{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %}
+        <form method="POST" action="/process">
+            Name:
+            <input type="text" name="thename" value="{{left}}" class="form-control"> Location:
+            <select class="form-control" name="location">
+                <option></option>
+                <option>San Jose</option>
+                <option>California</option>
+                <option>"DC"</option>
+            </select>
+            Language:
+            <select class="form-control" name="lang">
+                <option></option>
+                <option>Java</option>
+                <option>Python</option>
+                <option>Go</option>
+            </select>
+            Comments:
+            <textarea class="form-control" name='comment'>{{comment}}</textarea>
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+        <br>
+        <form method="POST" action="/clear">
+            <button type="submit" class="btn btn-secondary">Restart</button>
+        </form>
+    </div>
+</body>
+
+</html>
