@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing Grounds</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  
+    <style>
+        body {
+            font-size: 17px;
+            font-family: arial;
+            background: #f4f4f4;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Newsgator</h1>
+    <p>testing this one out </p>
+
+    
+    <h1>Hello,</h1>
+    <p>{{name}}, your email is {{email}} </p>
+    
+    <p>{{ request.session.name }}</p>
+
+
+    <select id="source">
+        <option>El Mundo</option>
+        <option>Reddit</option>
+        <option>RT</option>
+    </select>
+
+    <div id="target"></div>
+
+    <script>
+        $(document).ready(function () {
+
+            var source = $("#source").val();
+            var sources = {
+                "El Mundo": "https://newsapi.org/v2/top-headlines?sources=el-mundo&apiKey=",
+                "Reddit": "https://newsapi.org/v2/top-headlines?sources=reddit-r-all&apiKey=",
+                "RT": "https://newsapi.org/v2/top-headlines?sources=rt&apiKey=",
+            };
+
+
+            $("#source").change(function () {
+                source = $("#source").val();
+                console.log(sources[source]);
+                getNews();
+            });
+
+
+            function getNews() {
+                $("#target").html("");
+                // var apicall = "https://newsapi.org/v2/top-headlines?sources=reddit-r-all&apiKey=";
+                var apicall = sources[source];
+                var apikey = "fd83ead080ef43469e5548f326ddf351";
+                $.get(apicall + apikey, function (data) {
+                    console.log(data);
+                    for (let article of data.articles) {
+                        $("#target").append(`<p>${article.title}</p>`);
+                        $("#target").append(`<img scr="${article.urlToImage}"/>`);
+                        $("#target").append(`<a href="${article.url}"></p>`);
+                    }
+                }, "json");
+            }
+
+            function getNews() {
+                $("#target").html("");
+                // var apicall = "https://newsapi.org/v2/top-headlines?sources=reddit-r-all&apiKey=";
+                var apicall = sources[source];
+                var apikey = "bc3cb864fc27426d8b2aae4991d2bd5b";
+                $.get(apicall + apikey, function (data) {
+                    console.log(data);
+                    for (let article of data.articles) {
+                        $("#target").append(`<p>${article.title}</p>`);
+                        $("#target").append(`<img src="${article.urlToImage}"/>`);
+                        $("#target").append(`<p>${article.url}</p>`);
+                    }
+                }, "json");
+            }
+        });
+    </script>
+</body>
+
+</html>
+
