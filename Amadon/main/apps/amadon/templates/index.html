@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title>Amadon</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'amadon/css/bootstrap.css' %}" />
+
+    <body>
+        <header>
+            <div class="navbar navbar-dark bg-dark box-shadow">
+                <div class="container d-flex justify-content-between">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+                </div>
+            </div>
+
+        </header>
+
+        <main role="main">
+
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Amadon Store!</h1>
+                    <p class="lead text-muted">Please select all the items you'd like.</p>
+                </div>
+            </section>
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <form id="1" action='/process' method='POST'>
+                            {% csrf_token %} 
+                            {% for a in inventory %}
+                            <tr>
+                                <td>{{a.name}}</td>
+                                <td>{{a.price}}</td>
+                                <td>
+                                    <select name="{{a.id}}">
+                                        {% for b in checkrange%}
+                                        <option value="{{b}}">{{b}}</option>
+                                        {%endfor%}
+                                    </select>
+                                    <button form="1" type="submit" class="btn btn-success">Buy!</button>
+                                </td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                    </form>
+
+                </div>
+            </div>
+
+        </main>
+
+    </body>
+
+</html>
