@@ -39,7 +39,7 @@ def process(request):
 
 
 def results(request):
-    return render(request, 'checkout.html')
+    return render(request, 'results.html')
 
 
 def clear(request):
