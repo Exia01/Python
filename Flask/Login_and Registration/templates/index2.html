@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css'>
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js')}}"></script>
+    <style>
+        .container>.color {
+            color: red;
+        }
+
+        .col.s6>.btn {
+            width: 96%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h5>Hello,
+            <small> please register.</small>
+        </h5>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <p class="color">{{message}}</p>
+        {% endfor %} {% endif %} {% endwith %}
+        <div class="row">
+            <form action="/create" method="POST" form class="col s12" id="reg-form">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type="text" class="validate" name="Fname">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate" name="Lname">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate" name="Email">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate" minlength="5" name="pass">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" class="validate" minlength="5" name="Rpass">
+                            <label for="password">Password Confirmation</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <button class="btn btn-large btn-register waves-effect waves-light" type="submit" name="action">Register
+                                <i class="material-icons right">done</i>
+                            </button>
+                        </div>
+                        <div class="row">
+            </form>
+            <form action="/clear" method="POST">
+                <div class="input-field col s6">
+                    <button class="btn btn-large btn-register waves-effect waves-light" type="submit" name="action">Reset
+                        <i class="material-icons right">done</i>
+                    </button>
+                </div>
+            </form>
+            </div>
+            </div>
+            <a href="http://localhost:5000/login/" title="Login" class="ngl btn-floating btn-large waves-effect waves-light red">
+                <i class="material-icons">input</i>
+            </a>
+</body>
+<script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js'></script>
+<script src="js/index.js"></script>
+
+</html>

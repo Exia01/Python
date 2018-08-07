@@ -1,0 +1,16 @@
+* {
+  margin: 0 auto;
+}
+
+#wrapper {
+  height: 100%;
+  background-color: lightgrey;
+}
+.main{
+  display: flex;
+  width: auto;
+}
+.main img {
+  height: 150px;
+  width: auto;
+}

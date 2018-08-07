@@ -1,0 +1,82 @@
+
+SEQUENCE OF EVENTS
+
+*** in Views ***
+1. receive request object
+2. check contents (request.POST)
+3. validate contents  —> use appropriate validator
+
+*** in Models ***
+4. validate each individual element
+5. if errors, build error_list
+6. if error_list has contents, return tuple (False, error_list)
+7. if error_list is empty, save in database, return tuple (True, saved_object)
+
+*** in Views ***
+8. receive tuple --> store in results variable
+9. check contents
+10. if results[0] == True
+    --> save id in session, redirect to success page
+11. if results[0] == False
+    --> transfer errors to flash messages, redirect to form so user can reenter information
+
+
+**********************************************************************************************
+
+SEQUENCE OF EVENTS (for Registration)
+
+*** in Views ***
+1. receive request object
+2. check contents (request.POST)
+3. validate contents  —> use RegValidator
+
+*** in Models ***
+4. validate each individual element
+    - fields are not empty
+    - fields meet minimum length and/or do not exceed maximum length
+    - names contain only letters/do not contain numbers
+    - username/email does not already exist in database
+    - email has valid format
+    - confirm password matches password
+5. if errors, build error_list
+6. if error_list has contents, return tuple (False, error_list)
+7. if error_list is empty, save in database, return tuple (True, saved_object)
+
+*** in Views ***
+8. receive tuple --> store in results variable
+9. check contents
+10. if results[0] == True
+    --> redirect to login page
+    OR
+    --> save id in session, redirect to welcome page (automatic login)
+11. if results[0] == False
+    --> transfer errors to flash messages, redirect to form so user can reenter information
+
+
+**********************************************************************************************
+
+SEQUENCE OF EVENTS (for Login)
+
+*** in Views ***
+1. receive request object
+2. check contents (request.POST)
+3. validate contents  —> use LoginValidator
+
+*** in Models ***
+4. validate each individual element
+    - fields are not empty
+    - email (if used) has valid format
+    - username (or email) has match in database
+    - password matches password stored in database
+      (use bcrypt checkpw method, passing in both passwords)
+5. if errors, build error_list
+6. if error_list has contents, return tuple (False, error_list)
+7. if error_list is empty, retrieve object from database, return tuple (True, retrieved_object)
+
+*** in Views ***
+8. receive tuple --> store in results variable
+9. check contents
+10. if results[0] == True
+    --> save id in session, redirect to welcome page
+11. if results[0] == False
+    --> transfer errors to flash messages, redirect to form so user can reenter information

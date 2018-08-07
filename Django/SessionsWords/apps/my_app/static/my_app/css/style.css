@@ -1,0 +1,40 @@
+* {
+    font-family: sans-serif;
+}
+
+.inline {
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    height: 300px;
+    padding: 30px;
+    padding-left: 60px;
+
+}
+
+
+.border {
+    border-style: inset;
+    border-left: 5px solid lightskyblue;
+    border-radius: 5px;
+    width: 500px;
+}
+
+.red{
+    color: red;
+}
+.blue{
+    color: blue;
+}
+.green{
+    color: rgb(21, 206, 21);
+}
+
+.big {
+    font-size: 150%;
+}
+a{
+    justify-content: flex-end;
+    display: flex;
+    padding: 2px;
+}

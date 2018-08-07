@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+    <style>
+      .bg-dark {
+          background-color: #343a40!important;
+          border-radius: 15px;
+      }
+      a{
+        color: white;
+      }
+  </style>
+  <title>Edit</title>
+</head>
+<body>
+  <div class="mx-auto w-50 p-3 bg-dark text-white text-center">
+    <form class="" action="update" method="POST">
+      {% csrf_token %}
+      <h3>Edit Task {{task.id}}</h3>
+      {% if messages %}
+            {% for message in messages %}
+              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+      <div class="form-group">
+        Tasks:
+        <br>
+        <input type="text" id="tasks" name="task" placeholder="">
+        <br>
+        <br> Status:
+        <br>
+        <select name="status">
+            <option value=""></option>
+            <option value="">Done</option>
+            <option value="">Pending</option>
+            <option value="">Missed</option>
+          </select>
+        <input type="text" id="date" name="date" placeholder="">
+        <br>
+        <br> Date:
+        <br>
+        <input type="text" id="email" name="email" placeholder="">
+        <br>
+        <br>
+        <br> Time:
+        <br>
+        <input id="time" type="time" name="time" value="">
+        <br>
+        <br>
+        <button type="submit" class="btn btn-info" name="">Update</button>
+      </div>
+    </form>
+    <button class="btn btn-info">
+      <a href="/">Go Back</a>
+    </button>
+  </div>
+
+</body>
+
+</html>

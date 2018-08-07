@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Casino?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="main">
+            <div class="header">
+                <p>
+                    <img src="{{url_for('static', filename='img/')}}boi.jpg" height="80px">
+                </p>
+                Your Gold:
+                <textarea name="gold" readonly cols="7 "rows="1">{{money}}</textarea>
+            </div>
+            <br>
+            <div class="boxes">
+                <div class="box">
+                    <h4>Farm</h4>
+                    <form action="/process-money" method="POST">
+                        <p>(Earns 10-20 marios)</p>
+                        <input type="hidden" name="info" value="farm">
+                        <button type="submit">Find Gold!</button>
+                    </form>
+                    <br>
+                </div>
+                <div class="box">
+                    <h4>Cave</h4>
+                    <form action="/process-money" method="POST">
+                        <p>(Earns 5-10 marios)</p>
+                        <input type="hidden" name="info" value="cave">
+                        <button type="submit">Find Gold!</button>
+                    </form>
+                    <br>
+                </div>
+                <div class="box">
+                    <h4>House</h4>
+                    <form action="/process-money" method="POST">
+                        <p>(Earns 2-5 Hobbits)</p>
+                        <input type="hidden" name="info" value="house">
+                        <button type="submit">Find Gold!</button>
+                    </form>
+                    <br>
+                </div>
+                <div class="box">
+                    <h4>Casino</h4>
+                    <form action="/process-money" method="POST">
+                        <p>(Earns/Takes 0-50 Cryptos)</p>
+                        <input type="hidden" name="info" value="casino">
+                        <button type="submit">Find Gold!</button>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="text">
+                <h2>Results: </h2>
+                {% for i in session["activity"]: %}
+                    {{i[0]|safe}}
+                {%endfor%}
+            </div>
+            <form action="/clear" method="POST">
+                <button type="submit" class="btn btn-secondary" name="reset">reset</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

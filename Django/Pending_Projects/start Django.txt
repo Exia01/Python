@@ -1,0 +1,78 @@
+python manage.py runserver
+
+1 -- install a virtual env
+
+py -m pip install --user virtualenv
+
+
+2-- create a virtual env 
+
+py -m virtualenv env 
+or 
+py -m virtualenv DjangoEnv
+
+check for django install
+
+3-- activate  a virtual virtual env 
+.\env\Scripts\activate
+or 
+.\DjangoEnv\Scripts\activate
+
+4-- start a project 
+ django-admin startproject projectname
+
+cd main 
+
+5 - make app directory
+
+mkdir apps
+
+6 - get into apps 
+cd apps
+
+make app
+python ../manage.py startapp namgoeshere
+
+7 create an init py inside of apps 
+nul> __init__.py
+
+
+
+might need these later
+Session
+Now let’s set up to use session!
+
+In our terminal, head to the directory where manage.py resides and run the following commands:
+
+  # Need to be in same directory as manage.py file
+  > python manage.py makemigrations
+  > python manage.py migrate
+Excellent. Not only does that annoying warning you’ve been suffering disappear, 
+but now session is now available to us (as seen in that last line: Applying sessions.0001_initial... OK).
+
+Now we can restart our server and use session:
+
+request.session # It's a dictionary, so you can attach key/value pairs
+As request.session is just a dictionary, you can attach any key/value pairs.  
+For example, in the views.py file, you could do:
+
+request.session['name'] = request.POST['name']
+request.session['counter'] = 100
+In the html file, Django lets you directly access request.session.  
+For example to access request.session['name'], simply do:
+
+{{request.session.name}}
+Useful session methods:
+request.session['key']
+
+This will retrieve (get) the value stored in key
+request.session['key'] = 'value'
+Set the value that will be stored by key
+del request.session['key']
+
+Deletes a session key if it exists, throws a keyError if it doesn’t. Use along with try and except since it’s better to ask for forgiveness than permission
+'key' in request.session
+
+Returns a boolean of whether a key is in session or not
+{{ request.session.name }}
+Use dot notation (.) to access request.session keys from templates since square brackets ([]) aren’t allowed there

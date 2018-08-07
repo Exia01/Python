@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Don't look!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="header">
+            <h1>All My friends!</h1>
+            <p>jk I jave no friends :[ </p>
+        </div>
+        <div class="List">
+            <div class="friend_info">
+                {% for i in friends %}
+                <h3>First Name:{{i['first_name']}}</h3>
+                <h3>Last Name:{{i['last_name']}}</h3>
+                <h3>Occupation:{{i['occupation']}}</h3>
+                {%endfor%}
+            </div>
+            <hr>
+            <br>
+        </div>
+        <div class="input">
+            <form class="form-group" action="create_friend" method="post">
+                First Name:
+                <input type="text" name="first_name" value=""> 
+                Last Name:
+                <input type="text" name="last_name" value=""> 
+                Occupation:
+                <input type="text" name="occupation" value="">
+                <button type="submit" class="btn btn-primary" name="button">Add Friend</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'my_app/css/style.css' %}">
+    <title>Session Words</title>
+</head>
+
+<body>
+    <h1>Session Words</h1>
+
+    <div class="inline">
+        <form class="" action="/process" method="post">
+            {% csrf_token %}
+            <h3>Add a new word:</h3>
+            <input type="text" name="word" placeholder="Word">
+            <p>Choose a color:</p>
+            <input type="radio" name="color" value="red">Red
+            <br>
+            <input type="radio" name="color" value="green">Green
+            <br>
+            <input type="radio" name="color" value="blue">Blue
+            <br>
+            <br>
+            <input type="checkbox" name="big" value="big"> Show in BIG fonts!
+            <br>
+            <br>
+            <input type="hidden" name="time" value="{% now " H:i jS F Y " %}">
+            <input type="submit" name="" value="Add to Session">
+        </form>
+
+    </div>
+    <div class="inline border">
+
+        <a href="/clear">
+            <button>Clear session</button>
+        </a>
+        <p>Number of times this page was visited: {{request.session.visits}}</p>
+        {% for i in request.session.words %}
+        <p class="{{i.color}} {{i.big}}">{{i.word}} - added on {{i.time}}</p>
+        <!-- <p>{{i}}</p> -->
+        {% endfor %}
+
+    </div>
+</body>
+
+</html>

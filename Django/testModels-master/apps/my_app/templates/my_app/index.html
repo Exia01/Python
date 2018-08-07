@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>testModels</title>
+    </head>
+    <body>
+        <h1>testModels</h1>
+
+        {% if messages %}
+            {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form class="" action="/process" method="post">
+            {% csrf_token %}
+            <input type="text" name="fname" placeholder="First Name"><br>
+            <input type="text" name="lname" placeholder="Last Name"><br>
+            <input type="text" name="email" placeholder="Email">
+            <p><input type="submit" name="" value="Submit"></p>
+        </form>
+    </body>
+</html>

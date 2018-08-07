@@ -1,0 +1,83 @@
+<html>
+<head>
+    <title>Courses Store</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'courses/css/index.css' %}" />
+    <style>
+        .title{
+            width: 50%
+        }
+        table.table.table-striped {
+            width: 75%;
+        }
+        .btn-block {
+            display: block;
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-dark bg-dark box-shadow">
+            <div class="container d-flex justify-content-between">
+            </div>
+        </div>
+
+    </header>
+  
+    <main role="main">
+  
+        <section class="jumbotron">
+            <div class="container">
+                    {% if messages %}
+                    {% for message in messages %}
+                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                <h2 class="jumbotron-heading">Popup e-courses</h2><br>
+                <h4 class="jumbotron-heading">Add a new course below</h4><br>
+                    <form class="" action="/add" method="POST">
+                        {% csrf_token %}
+                            <p>Name:</p><input type="text" name="cname" class="title form-control">
+                            <label for="comment">Description:</label>
+                            <textarea class="title form-control" name="desc" rows="5" id="comment"></textarea><br>
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </form>
+            </div>
+        </section>
+    
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <form action='/checkout' method='post'>
+                        <h4 class="mb-3" id='buy'>Courses</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Description</th>
+                                    <th>Date Added</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {% for b in info %}
+                                <tr>
+                                    <td>{{b.cname}}</td>
+                                    <td>{{b.desc}}</td>
+                                    <td>{{b.created_at}}</td>
+                                    <td><a href="/remove/{{b.id}}">Remove</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+    
+                    <h4 class="mb-3" id='info'>Comments?</h4>
+                    <hr class="mb-4">
+                    <button class="btn btn-info btn-md btn-block" type="submit">Comments?</button>
+                    </form> 
+                </div>
+            </div>
+    </main>
+      
+</body>
+</html>

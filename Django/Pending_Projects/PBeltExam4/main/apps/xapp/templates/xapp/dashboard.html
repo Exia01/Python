@@ -1,0 +1,142 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>Appointment Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'xapp/css/dashboard.css' %}" />
+    <style>
+        .title{
+            width: 50%
+        }
+        table.table.table-striped {
+            width: 75%;
+        }
+        .btn-block {
+            display: block;
+            width: 25%;
+        }
+        
+        a:hover 
+        {
+             color:rgb(228, 157, 145); 
+             text-decoration:none; 
+             cursor:pointer;  
+        }
+        mores{
+            color:rgb(250, 250, 250); 
+            text-decoration:none; 
+            cursor:pointer;  
+        }
+        .links{
+            color: rgb(75, 129, 199)
+        }
+        .borders{
+            border: .5px, lightgrey;
+        }
+        a {
+            color: rgb(66, 124, 218);
+            text-decoration: none;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-dark bg-dark box-shadow">
+            <div class="container d-flex justify-content-between">
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+        <section class="jumbotron">
+            <div class="container">
+                <button type="button" class="btn btn-danger">
+                            <a href="/logout">Logout</a>
+                    </button>
+                <br>
+                <br>
+                <h2 class="jumbotron-heading">Hello, {{request.session.name}}!</h2>
+                <br>
+                <h5 class="jumbotron-heading">Here are your appointments for today, Wish List </h5>
+                    <table class="table borders table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Tasks</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        <tbody>
+                            {% for all in currenttasks %}
+                                <tr>
+                                    <td>{{all.task}} </td>
+                                    <td>{{all.date}}</td>
+                                    <td>{{all.status}}</td>
+                                    <td>
+                                        <a class="mores" href="/edit/{{all.id}}">Edit</a>  | <a class="mores" href="/delete/{{all.id}}">Delete</a>
+                                    </td> 
+                                 </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+        </section>
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <h4 class="mb-3">Your Other appointments</h4>
+                    <table class="table table-striped">
+                        <thead class="bg-success">
+                            <tr>
+                                <th>Tasks</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for allother in tasklist  %}
+                            <tr>
+                                <td>{{allother.name}}</td>
+                                <td>{{allother.date}}</td>
+                                <td>{{allother.time}}</td>
+                             </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container">
+                    <div class="album py-5 bg-light">
+                        <div class="form-group tasks"> 
+                            <h5 class="mb-3" id='info'>Add Appointment</h5>
+                                <form class="" action="/add" method="POST">
+                                {% csrf_token %}  
+                                 {% if messages %}
+                                    {% for message in messages %}
+                                        {% if "adderror" in message.tags %}
+                                            <p{% if message.tags %} class=" warning text-center {{ message.tags }}"{% endif %}>{{ message }}</p>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                    Date:
+                                    <input class="form-control form-control-sm" id="date" type="date" name="date">
+                                    <br>
+                                    Hour:
+                                    <input class="form-control form-control-sm" id="appt-time" type="time" name="hour" value="">
+                                    <br>
+                                    Tasks:
+                                    <input class="form-control form-control-sm" type="text" name="task" placeholder="Task">
+                                    <br>
+                                    <button class="btn btn-info btn-sm btn-block" type="submit">Submit</button>
+                                </form> 
+                        </div>
+                    </div>
+                </div>
+    </main>
+      
+</body>
+</html>
