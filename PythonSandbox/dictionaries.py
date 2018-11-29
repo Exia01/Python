@@ -48,6 +48,7 @@ print(person)
 # List of dict
 people = [
     {'name': 'Martha', 'age': 40},
-    {'name': 'Bob', 'age': 20}
+    {'name': 'Bob', 'age': [1,20]}
 ]
+print(people)
 print(people[1]['name'])
