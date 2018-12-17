@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^$', views.home_page),
     url(r'^about/$', views.about_page),
     url(r'^contact/$', views.contact_page),
+    url(r'^login/$', views.login_page),
+    url(r'^register/$', views.register_page),
     url(r'^accounts/$', views.dashboard_page),
     path('admin/', admin.site.urls),
 ]
