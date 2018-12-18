@@ -1,13 +1,15 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import (authenticate, login, get_user_model)
 from django.shortcuts import render, redirect
-from .forms import ContactForm, LoginForm
+from .forms import ContactForm, LoginForm, RegisterForm
 
 
 def home_page(req):
     context = {
         'title': 'Hello World!',
-        'content': 'Welcome to the home page!'
+        'content': 'Welcome to the home page!',
     }
+    if req.user.is_authenticated:
+        context['premium_content'] = 'YEaaaa buddy!'
     return render(req, "home_page.html", context)
 
 
@@ -48,27 +50,37 @@ def login_page(req):
         # using global user object
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
-        user = authenticate(req, username=username, password=password) # extracts the user
+        user = authenticate(req, username=username,
+                            password=password)  # extracts the user
         if user is not None:
-            login(req, user) # this logs in the user
+            login(req, user)  # this logs in the user
             # Redirect to a success page.
             context['form'] = LoginForm()  # resets the session
             print("User Logged in", req.user.is_authenticated)
-            return redirect('/login')
+            return redirect('/')
         else:
             # Return an 'invalid login' error message.
             print('Error')
     return render(req, "auth/login.html", context)
 
 
+User = get_user_model()
+
+
 def register_page(req):
-    form = LoginForm(req.POST or None)  # instanciating a form
-    if form.is_valid():
-        print(form.cleaned_data)
+    form = RegisterForm(req.POST or None)  # instanciating a form
+    # print(form)
+    # print(req.post)
     context = {
-        'form': 'form',
-        'content': 'Welcome to the register page!',
+        'form': form,
+        'content': 'Welcome to the register page!'
     }
+    if form.is_valid():
+        email = form.cleaned_data.get('email')
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        newUser = User.objects.create_user(username, email, password)
+        print(newUser)
     return render(req, "auth/login.html", context)
 
 
