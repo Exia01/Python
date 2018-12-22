@@ -14,6 +14,7 @@ def upload_image_path(instance, filename):
     return f'products/{new_filename}/{final_filename}'
 
 
+
 # performs custom query methods 
 class ProductManager(models.Manager):
     def get_queryset(self): #overwritting the reg get query method 
@@ -26,14 +27,23 @@ class ProductManager(models.Manager):
     # def all(self): ### Product.objects.all()
     #     return self.get_queryset().active()
 
-    # def get_by_id(self, id):
-    #     qs = self.get_queryset().filter(id=id)
-    #     if qs.count() == 1:
-    #         return qs.first()
-    #     return None
+    def get_by_id(self, id):
+        qs = self.get_queryset().filter(id=id)
+        if qs.count() == 1:
+            return qs.first()
+        return None
 
 
+class ProductManagerFind(models.Manager):
+    def get_queryset(self): #overwritting the reg get query method 
+        return ProductQuerySet(self.model, using=self._db)
 
+    
+    def find_by_id(self, id):
+        qs = self.get_queryset().filter(id=id)
+        if qs.count() == 1:
+            return qs.first()
+        return None
 
 class Product(models.Model):  
     title           = models.CharField(max_length=30)
@@ -45,6 +55,7 @@ class Product(models.Model):
     active          = models.BooleanField(default=False)
     
     objects = ProductManager()  # wrapping it or "extending it"
+    find = ProductManagerFind()
     def __str__(self):  # a method
         return self.title
 

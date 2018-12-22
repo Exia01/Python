@@ -1,62 +1,48 @@
 from django.views.generic import ListView, DetailView
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
 from .models import Product
 
 
 class ProductListView(ListView):
-    queryset = Product.objects.all()  # all queryset
     template_name = 'products/list.html'
 
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super().get_context_data(*args, **kwargs)
-    #     print(context)
-    #     return context # get the context for whatever view is being done
-
-
-# function based views
-def Product_List_View(request):
-    queryset = Product.objects.all()
-    context = {
-        'object_list': queryset
-    }
-    return render(request, "product/product_list_view.html", context)
+    def get_queryset(self, *args, **kwargs):  # using instead of queryset in ln 9
+        request = self.request
+        return Product.objects.all()
 
 
 class ProductDetailView(DetailView):
     queryset = Product.objects.all()  # all queryset
     template_name = 'products/detail.html'
 
-    # def get_context_data(self, *args, **kwargs): #automatically separating the data
+    # def get_context_data(self, *args, **kwargs):
     #     context = super().get_context_data(*args, **kwargs)
     #     print(context)
-    #     return context # get the context for whatever view is being done
+    #     return context  # get the context for whatever view is being done
+    
 
+class ProductFeaturedListView(ListView):
+    # queryset = Product.objects.all()  # all queryset
+    template_name = 'products/list.html'
 
-# def product_detail_view(request, pk=None, *args, **kwargs):
-#     instance = Product.objects.get(pk=pk, featured=True)  # id #instace as object
-#     instance = get_object_or_404(Product, pk=pk, featured=True)
-#     try:
-#         instance = Product.objects.get(id=pk)
-#     except Product.DoesNotExist:
-#         print('no product here')
-#         raise Http404("Product doesn't exist")
-#     except:
-#         print("huh?")
+    def get_queryset(self, *args, **kwargs):  # using instead of queryset in ln 9
+        request = self.request
+        return Product.objects.all().featured()
 
-#     instance = Product.objects.get_by_id(pk)
-#     if instance is None:
-#         raise Http404("Product doesn't exist")
-#     print(instance)
-#     qs = Product.objects.filter(id=pk)
+class ProductFeaturedDetailView(DetailView):
+    queryset = Product.objects.all().featured()  # all queryset
+    template_name = 'products/featured-detail.html'
 
-#     # print(qs)
-#     if qs.exists() and qs.count() == 1:  # len(qs)
-#         instance = qs.first()
-#     else:
-#         raise Http404("Product doesn't exist")
+def product_detail_view(request, pk=None, *args, **kwargs):
 
-#     context = {
-#         'object': instance
-#     }
-#     return render(request, "products/detail.html", context)
+    instance = Product.objects.get_by_id(pk)
+    print(instance)
+    if instance is None:
+        raise Http404("Product doesn't exist")
+
+    context = {
+        'object': instance
+    }
+    return render(request, "products/detail.html", context)
