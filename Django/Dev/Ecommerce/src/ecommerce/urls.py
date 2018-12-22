@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
 
+# prodcuts app
 from . import views
 
 urlpatterns = [
@@ -27,11 +28,12 @@ urlpatterns = [
     url(r'^login/$', views.login_page),
     url(r'^register/$', views.register_page),
     url(r'^accounts/$', views.dashboard_page),
+    url(r'^products/', include(('apps.products.urls'))),
     url('admin/', admin.site.urls),
 ]
 
 
-if settings.DEBUG: # If it is in debug mode
+if settings.DEBUG:  # If it is in debug mode
     urlpatterns = urlpatterns + \
         static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns = urlpatterns + \
