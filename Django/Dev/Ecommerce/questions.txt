@@ -1,3 +1,5 @@
 1 - why is the detailView still providing me with the single item query even though there are no fuctions attached to it?
 
 is it automatically separating it?
+
+2- signals???

@@ -2,6 +2,8 @@ import random
 from .methods import get_filename_ext
 from django.db import models
 from .customQueries import ProductQuerySet
+from .utils import unique_slug_generator
+from django.db.models.signals import pre_save, post_save
 
 
 def upload_image_path(instance, filename):
@@ -36,7 +38,8 @@ class ProductManager(models.Manager):
 
 
 class Product(models.Model):  
-    title           = models.CharField(max_length=30)
+    title           = models.CharField(max_length=120)
+    slug            = models.SlugField(blank=True, unique=True)
     description     = models.TextField()
     price           = models.DecimalField(decimal_places=2, max_digits=25, default=0.00)
     # null is for the db, blank is for django
@@ -47,6 +50,13 @@ class Product(models.Model):
     objects = ProductManager()  # wrapping it or "extending it"
     def __str__(self):  # a method
         return self.title
+
+
+def product_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+pre_save.connect(product_pre_save_receiver, sender=Product) 
 
 
 # if python -V < 3.6

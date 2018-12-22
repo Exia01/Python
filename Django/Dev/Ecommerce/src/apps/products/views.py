@@ -13,14 +13,35 @@ class ProductListView(ListView):
         return Product.objects.all()
 
 
+class ProductDetailSlugView(DetailView):
+    queryset = Product.objects.all()
+    template_name = "products/detail.html"
+
+    def get_object(self, *args, **kwargs):
+        request = self.request
+        slug = self.kwargs.get('slug')
+
+        #instance = get_object_or_404(Product, slug=slug, active=True)
+        try:
+            instance = Product.objects.get(slug=slug, active=True)
+        except Product.DoesNotExist:
+            raise Http404("Not found..")
+        except Product.MultipleObjectsReturned:
+            qs = Product.objects.filter(slug=slug, active=True)
+            instance = qs.first()
+        except:
+            raise Http404("Something broke ")
+        return instance
+
+
 class ProductDetailView(DetailView):
-    queryset = Product.objects.all()  # all queryset
+    # queryset = Product.objects.all()  # all queryset
     template_name = 'products/detail.html'
 
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super().get_context_data(*args, **kwargs)
-    #     print(context)
-    #     return context  # get the context for whatever view is being done
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        print(context)
+        return context  # get the context for whatever view is being done
     
 
 class ProductFeaturedListView(ListView):
