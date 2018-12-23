@@ -3,10 +3,10 @@ import os
 
 
 def get_filename_ext(filepath):
-    print('from get filename, filepath: ', filepath)
+    # print('from get filename, filepath: ', filepath)
     base_name = os.path.basename(filepath)
     name, ext = os.path.splitext(base_name)
-    print('from get filename: name, ext ', name, ext, '\n')
+    # print('from get filename: name, ext ', name, ext, '\n')
     return name, ext   
 
 
