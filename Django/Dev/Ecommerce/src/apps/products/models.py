@@ -2,8 +2,9 @@ import random
 from .methods import get_filename_ext
 from django.db import models
 from .customQueries import ProductQuerySet
-from .utils import unique_slug_generator
+
 from django.db.models.signals import pre_save, post_save
+from .signals import product_pre_save_receiver
 
 
 def upload_image_path(instance, filename):
@@ -48,13 +49,14 @@ class Product(models.Model):
     active          = models.BooleanField(default=False)
     
     objects = ProductManager()  # wrapping it or "extending it"
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('detail', args=[str(self.slug)])
+
     def __str__(self):  # a method
         return self.title
 
-
-def product_pre_save_receiver(sender, instance, *args, **kwargs):
-    if not instance.slug:
-        instance.slug = unique_slug_generator(instance)
 
 pre_save.connect(product_pre_save_receiver, sender=Product) 
 

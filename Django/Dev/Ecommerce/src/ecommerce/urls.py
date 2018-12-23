@@ -27,8 +27,8 @@ urlpatterns = [
     url(r'^contact/$', views.contact_page),
     url(r'^login/$', views.login_page),
     url(r'^register/$', views.register_page),
-    url(r'^accounts/$', views.dashboard_page),
     url(r'^products/', include(('apps.products.urls'))),
+    url(r'^accounts/$', views.dashboard_page),
     url('admin/', admin.site.urls),
 ]
 
