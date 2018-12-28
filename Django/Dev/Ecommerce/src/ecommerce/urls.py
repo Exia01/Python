@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
-
+from django.views.generic import TemplateView
 
 from . import views
 
@@ -28,8 +28,11 @@ urlpatterns = [
     url(r'^login/$', views.login_page, name='login'),
     url(r'^register/$', views.register_page, name='register'),
     url(r'^products/', include(('apps.products.urls', 'products'), namespace='products')),
+    url(r'^search/', include(('apps.search.urls', 'search'), namespace='search')),
     url(r'^accounts/$', views.dashboard_page),
     url('admin/', admin.site.urls),
+    # Test pages
+    url(r'^bootstrap/$', TemplateView.as_view(template_name='bootstrap/example.html')),
 ]
 
 

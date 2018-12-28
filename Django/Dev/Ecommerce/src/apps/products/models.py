@@ -1,9 +1,9 @@
 import random
+
 from .methods import get_filename_ext
 from django.db import models
 from .customQueries import ProductQuerySet
 from django.urls import reverse
-
 from django.db.models.signals import pre_save, post_save
 from .signals import product_pre_save_receiver
 
@@ -18,26 +18,27 @@ def upload_image_path(instance, filename):
     return f'products/{new_filename}/{final_filename}'
 
 
-# performs custom query methods 
+# performs custom query methods
 class ProductManager(models.Manager):
-    def get_queryset(self): #overwritting the reg get query method 
+    def get_queryset(self):  # overwritting the reg get query method
         return ProductQuerySet(self.model, using=self._db)
 
     # named specific queries or model manager queries
-    # def features(self): ### Product.objects.featured()
-    #     return self.get_queryset().featured()
+    def all(self):  # Product.objects.all()
+        return self.get_queryset().active()
 
-    # def all(self): ### Product.objects.all()
-    #     return self.get_queryset().active()
+    def featured(self):  # Product.objects.featured()
+        return self.get_queryset().featured()
 
-    # def get_by_id(self, id):
-    #     qs = self.get_queryset().filter(id=id)
-    #     if qs.count() == 1:
-    #         return qs.first()
-    #     return None
+    def get_by_id(self, id):
+        # Product.objects == self.get_queryset()
+        qs = self.get_queryset().filter(id=id)
+        if qs.count() == 1:
+            return qs.first()
+        return None
 
-
-
+    def search(self, query):
+        return self.get_queryset().active().search(query)
 
 class Product(models.Model):  
     title           = models.CharField(max_length=120)
