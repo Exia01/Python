@@ -18,8 +18,12 @@ class ProductQuerySet(models.query.QuerySet):
         return self.filter(featured=True, active=True)
 
     def search(self, query):
-        tags=()
-        lookups = (Q(title__icontains=query) | Q(description__icontains=query) | Q(
-            price__icontains=query))  # sets a tuple?
+        tags = ()
+        lookups = (Q(title__icontains=query) |
+                   Q(description__icontains=query) |
+                   Q(price__icontains=query) |
+                   Q(tag__title__icontains=query))
+
+        # sets a tuple?
         # Q(tag__name__icontains=query)
         return self.filter(lookups).distinct()
