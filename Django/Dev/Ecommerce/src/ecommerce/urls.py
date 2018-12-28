@@ -18,16 +18,16 @@ from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
 
-# prodcuts app
+
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.home_page),
-    url(r'^about/$', views.about_page),
-    url(r'^contact/$', views.contact_page),
-    url(r'^login/$', views.login_page),
-    url(r'^register/$', views.register_page),
-    url(r'^products/', include(('apps.products.urls'))),
+    url(r'^$', views.home_page, name='home'),
+    url(r'^about/$', views.about_page, name='about'),
+    url(r'^contact/$', views.contact_page, name='contact'),
+    url(r'^login/$', views.login_page, name='login'),
+    url(r'^register/$', views.register_page, name='register'),
+    url(r'^products/', include(('apps.products.urls', 'products'), namespace='products')),
     url(r'^accounts/$', views.dashboard_page),
     url('admin/', admin.site.urls),
 ]

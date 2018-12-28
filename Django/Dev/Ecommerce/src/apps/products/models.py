@@ -2,6 +2,7 @@ import random
 from .methods import get_filename_ext
 from django.db import models
 from .customQueries import ProductQuerySet
+from django.urls import reverse
 
 from django.db.models.signals import pre_save, post_save
 from .signals import product_pre_save_receiver
@@ -47,13 +48,11 @@ class Product(models.Model):
     image           = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     featured        = models.BooleanField(default=False)
     active          = models.BooleanField(default=False)
-    
+    timestamp       = models.DateTimeField(auto_now_add=True)
     objects = ProductManager()  # wrapping it or "extending it"
 
     def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse('detail', args=[str(self.slug)])
-
+        return reverse('products:detail', args=[str(self.slug)])
     def __str__(self):  # a method
         return self.title
 
