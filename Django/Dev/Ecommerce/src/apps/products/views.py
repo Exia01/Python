@@ -28,7 +28,7 @@ class ProductDetailSlugView(DetailView):
             raise Http404("Not found..")
         except Product.MultipleObjectsReturned:
             qs = Product.objects.filter(slug=slug, active=True)
-            print(qs)
+            # print(qs)
             instance = qs.first()
         except:
             raise Http404("Something broke ")
@@ -55,14 +55,14 @@ class ProductFeaturedListView(ListView):
 
 class ProductFeaturedDetailView(DetailView):
     queryset = Product.objects.all().featured()  # missing .all()
-    print(queryset)
+    # print(queryset)
     template_name = 'products/featured-detail.html'
 
 
 def product_detail_view(request, pk=None, *args, **kwargs):
 
     instance = Product.objects.get_by_id(pk)
-    print(instance)
+    # print(instance)
     if instance is None:
         raise Http404("Product doesn't exist")
 
