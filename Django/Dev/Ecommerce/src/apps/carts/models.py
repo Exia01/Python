@@ -1,5 +1,7 @@
+from decimal import Decimal
 from django.conf import settings
 from django.db import models
+from django.db.models.signals import pre_save, post_save, m2m_changed
 from ..products.models import Product
 
 User = settings.AUTH_USER_MODEL
@@ -35,8 +37,8 @@ class Cart(models.Model):
     user = models.ForeignKey(User, null=True, blank=True,
                              on_delete=models.SET_DEFAULT, default=None)  # try Cascade maybe?
     products = models.ManyToManyField(Product, blank=True)
-    # updated     = models.DateTimeField(auto_now=True)
-    # subtotal    = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    updated     = models.DateTimeField(auto_now=True)
+    subtotal    = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -44,3 +46,32 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
+    # print(action)
+    if  action in ['post_add', 'post_remove', 'post_clear']:
+        products = instance.products.all()
+        total = 0
+        for x in products:
+            total += x.price
+        if instance.subtotal != total:
+            instance.subtotal = total
+            instance.save()
+
+m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
+
+
+def pre_save_cart_receiver(sender, instance, *args, **kwargs):
+    # print(instance)
+    # print(sender)
+    if instance.subtotal > 0:
+        instance.total = Decimal(instance.subtotal) * Decimal(1.08)  # 8% tax
+    else:
+        instance.total = 0.00
+
+
+pre_save.connect(pre_save_cart_receiver, sender=Cart)
+
+
+
