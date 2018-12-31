@@ -1,7 +1,11 @@
 from django.contrib.auth import (authenticate, login, get_user_model)
 from django.shortcuts import render, redirect
 from .forms import ContactForm, LoginForm, RegisterForm
+from django.contrib.auth import logout
 
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 def home_page(req):
     # print(req.session.get("first_name", "Guest"))

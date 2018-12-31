@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^about/$', views.about_page, name='about'),
     url(r'^contact/$', views.contact_page, name='contact'),
     url(r'^login/$', views.login_page, name='login'),
+    url(r'^logout/$', views.logout_view, name='logout_view'),
     url(r'^register/$', views.register_page, name='register'),
     url(r'^products/', include(('apps.products.urls', 'products'), namespace='products')),
     url(r'^search/', include(('apps.search.urls', 'search'), namespace='search')),
