@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^register/$', views.register_page, name='register'),
     url(r'^products/', include(('apps.products.urls', 'products'), namespace='products')),
     url(r'^search/', include(('apps.search.urls', 'search'), namespace='search')),
-    url(r'^carts/', include(('apps.carts.urls', 'carts'), namespace='carts')),
+    url(r'^cart/', include(('apps.carts.urls', 'cart'), namespace='cart')),
     url(r'^accounts/$', views.dashboard_page),
     url('admin/', admin.site.urls),
     # Test pages
