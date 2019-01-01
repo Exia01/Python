@@ -9,8 +9,9 @@ def cart_home(request):
 
 
 def cart_update(request):
-    # print(request.POST)
+    print(request.POST)
     product_id = request.POST.get('product_id')
+    # print(product_id)
     if product_id is not None:
         try:
             product_obj = Product.objects.get(id=product_id)
@@ -22,6 +23,7 @@ def cart_update(request):
             cart_obj.products.remove(product_obj)
         else:
             cart_obj.products.add(product_obj)
+    request.session['cart_items'] = cart_obj.products.count()
     return redirect('cart:home')
 
 
