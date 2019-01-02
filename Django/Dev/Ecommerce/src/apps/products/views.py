@@ -3,6 +3,7 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
 from .models import Product
+from ..carts.models import Cart
 
 
 class ProductListView(ListView):
@@ -17,6 +18,12 @@ class ProductDetailSlugView(DetailView):
     # queryset = Product.objects.all()
     template_name = "products/detail.html"
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailSlugView, self).get_context_data(*args, **kwargs)
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context
+
     def get_object(self, *args, **kwargs):
         request = self.request
         slug = self.kwargs.get('slug')
@@ -28,7 +35,7 @@ class ProductDetailSlugView(DetailView):
             raise Http404("Not found..")
         except Product.MultipleObjectsReturned:
             qs = Product.objects.filter(slug=slug, active=True)
-            print(qs)
+            # print(qs)
             instance = qs.first()
         except:
             raise Http404("Something broke ")
@@ -55,14 +62,14 @@ class ProductFeaturedListView(ListView):
 
 class ProductFeaturedDetailView(DetailView):
     queryset = Product.objects.all().featured()  # missing .all()
-    print(queryset)
+    # print(queryset)
     template_name = 'products/featured-detail.html'
 
 
 def product_detail_view(request, pk=None, *args, **kwargs):
 
     instance = Product.objects.get_by_id(pk)
-    print(instance)
+    # print(instance)
     if instance is None:
         raise Http404("Product doesn't exist")
 

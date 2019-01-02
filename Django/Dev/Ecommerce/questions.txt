@@ -3,3 +3,6 @@
 is it automatically separating it?
 
 2- signals???
+
+
+3- how was he able to do the products.get_absolute_url????

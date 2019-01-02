@@ -4,7 +4,7 @@ from .models import Product
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'id', 'slug']
+    list_display = ['__str__', 'id', 'slug', 'price']
 
     class Meta:
         model = Product
