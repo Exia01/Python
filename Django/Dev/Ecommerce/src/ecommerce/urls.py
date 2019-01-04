@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.contrib.auth.views import LogoutView
 
 from . import views
 
@@ -25,16 +26,13 @@ urlpatterns = [
     url(r'^$', views.home_page, name='home'),
     url(r'^about/$', views.about_page, name='about'),
     url(r'^contact/$', views.contact_page, name='contact'),
-    url(r'^login/$', views.login_page, name='login'),
-    url(r'^logout/$', views.logout_view, name='logout_view'),
-    url(r'^register/$', views.register_page, name='register'),
     url(r'^products/', include(('apps.products.urls', 'products'), namespace='products')),
     url(r'^search/', include(('apps.search.urls', 'search'), namespace='search')),
     url(r'^cart/', include(('apps.carts.urls', 'cart'), namespace='cart')),
-    url(r'^accounts/$', views.dashboard_page),
+    url(r'^accounts/', include(('apps.accounts.urls', 'account'), namespace='account')),
     url('admin/', admin.site.urls),
     # Test pages
-    url(r'^bootstrap/$', TemplateView.as_view(template_name='bootstrap/example.html')),
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
 ]
 
 
@@ -43,3 +41,5 @@ if settings.DEBUG:  # If it is in debug mode
         static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns = urlpatterns + \
         static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+ # url(r'^bootstrap/$', TemplateView.as_view(template_name='bootstrap/example.html')),
