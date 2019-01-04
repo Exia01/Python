@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class GuestForm(forms.ModelForm):
+class GuestForm(forms.Form):
    email = forms.CharField(widget=forms.EmailInput(
         attrs={"class": "form-control", 'id': 'form_email', "placeholder": "Your email", }))
 
