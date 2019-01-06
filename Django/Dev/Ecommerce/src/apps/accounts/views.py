@@ -40,6 +40,10 @@ def login_page(req):
                             password=password)  # extracts the user
         if user is not None:
             login(req, user)  # this logs in the user
+            try:
+                del req.session['guest_email_id']
+            except:
+                pass
             if is_safe_url(redirect_path, req.get_host()):
                 return redirect(redirect_path)
             else:
