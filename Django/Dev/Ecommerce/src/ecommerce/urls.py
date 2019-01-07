@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^products/', include(('apps.products.urls', 'products'), namespace='products')),
     url(r'^search/', include(('apps.search.urls', 'search'), namespace='search')),
     url(r'^cart/', include(('apps.carts.urls', 'cart'), namespace='cart')),
+    url(r'^checkout/address/create/', include(('apps.addresses.urls', 'address'), namespace='address')),
     url(r'^accounts/', include(('apps.accounts.urls', 'account'), namespace='account')),
     url('admin/', admin.site.urls),
     # Test pages
