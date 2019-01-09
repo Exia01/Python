@@ -19,8 +19,7 @@ class CartManager(models.Manager):
                 cart_obj.user = request.user
                 cart_obj.save()
         else:
-            cart_obj = Cart.objects.new(
-                user=request.user)  # could also do self.new
+            cart_obj = Cart.objects.new(user=request.user)  # could also do self.new
             new_obj = True
             request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj
@@ -34,8 +33,7 @@ class CartManager(models.Manager):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True,
-                             on_delete=models.SET_DEFAULT, default=None)  # try Cascade maybe?
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_DEFAULT, default=None)  # try Cascade maybe?
     products = models.ManyToManyField(Product, blank=True)
     updated     = models.DateTimeField(auto_now=True)
     subtotal    = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)

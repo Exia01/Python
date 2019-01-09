@@ -6,7 +6,6 @@ from ..billing.models import BillingProfile
 from .forms import AddressForm
 
 # CRUD create update retrieve delete
-
 def checkout_address_create_view(request):
     form = AddressForm(request.POST or None)
     context = {
@@ -17,14 +16,21 @@ def checkout_address_create_view(request):
     redirect_path = next_ or next_post or None
 
     if form.is_valid():
-        print(request.POST)
-        instance = form.save(commit=False)
+
         billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
-        # print('this is from checkout address ',billing_profile)
+        instance = form.save(commit=False)
+ 
+        
         if billing_profile is not None:
             address_type = request.POST.get('address_type', 'shipping')
             instance.billing_profile = billing_profile
+            instance.address_type = address_type
             instance.save()
+
+            request.session[address_type + '_address_id'] = instance.id
+            # billing_address_id = request.session.get('billing_address_id', None)
+            # shipping_address_id = request.session.get('shipping_address_id', None)
+            print(address_type + '_address_id')
         else:
             print('Error Here')
             return redirect('cart:checkout')
