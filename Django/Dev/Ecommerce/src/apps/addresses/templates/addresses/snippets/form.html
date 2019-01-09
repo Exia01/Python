@@ -1,0 +1,24 @@
+<form method='POST' action='{% if action_url %}{{ action_url }}{% else %}{% url "account:login" %}{% endif %}'> {% csrf_token %}
+    {% if next_url %}
+    <input type='hidden' name='next' value='{{ next_url }}' />
+    {% endif %}
+
+        {% if address_type %}
+        <input type='hidden' name='address_type' value='{{ address_type }}' />
+        {% endif %}
+
+    {% for field in form %}
+    <div class="form-group row">
+        {{ field.label_tag }}
+        {{ field.errors }}
+        {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="form-group row">
+        <button class="btn btn-info" type="submit">Submit</button>
+    </div>
+</form>

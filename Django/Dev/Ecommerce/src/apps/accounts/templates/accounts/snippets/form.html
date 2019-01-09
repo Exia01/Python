@@ -1,9 +1,7 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h1>Login</h1>
-<form action="" method="POST">
-    {% csrf_token %}
+<form method='POST' action='{% if action_url %}{{ action_url }}{% else %}{% url "account:login" %}{% endif %}'> {% csrf_token %}
+    {% if next_url %}
+    <input type='hidden' name='next' value='{{ next_url }}' />
+    {% endif %}
     {% for field in form %}
     <div class="form-group row">
         {{ field.label_tag }}
@@ -19,4 +17,3 @@
         <button class="btn btn-info" type="submit">Submit</button>
     </div>
 </form>
-{% endblock %}
