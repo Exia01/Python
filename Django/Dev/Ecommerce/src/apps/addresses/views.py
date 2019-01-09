@@ -46,10 +46,12 @@ def checkout_address_reuse_view(request):
         redirect_path = next_ or next_post or None
         if request.method == "POST":
             print(request.POST)
+            print('Hit Post')
 
             shipping_address = request.POST.get('shipping_address', None)
             address_type = request.POST.get('address_type', 'shipping')
             billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
+            print(shipping_address)
 
             if shipping_address is not None:
                 qs = Address.objects.filter(billing_profile=billing_profile, id=shipping_address)
