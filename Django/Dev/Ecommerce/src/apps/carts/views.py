@@ -75,7 +75,7 @@ def checkout_home(request):
             del request.session['cart_id']
             del request.session['cart_items']
 
-            return redirect("cart:home")
+            return redirect("cart:success")
     context = {
         'object': order_obj,
         'billing_profile': billing_profile,
@@ -87,6 +87,9 @@ def checkout_home(request):
     return render(request, 'carts/checkout.html', context)
 
 
+
+def checkout_done_view(request):
+    return render(request, "carts/checkout_done.html", {})
 """
 request.session.session_key
 request.session.set_expiry(300) # 5 minutes
