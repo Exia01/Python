@@ -24,6 +24,7 @@
         <h1>Hello, world!</h1>
         <h1>some other text!</h1> -->
         <h1>Hello There!</h1>
+        <h1 id="header">Clicker</h1>
         <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae rem atque suscipit molestias ullam quibusdam, asperiores labore quod culpa distinctio earum possimus similique modi unde eaque reprehenderit consequuntur libero voluptate? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa commodi maxime aut facere ea quia eveniet voluptates, nostrum et, recusandae cupiditate perspiciatis laborum sint! Cumque possimus vel consequuntur nulla perferendis.</p>
 
         <p class="description">Testing some test some text some stuff some here some there some everywhere.</p>
@@ -87,7 +88,12 @@
                       item.css("overflow-y", "scroll")
                   }
                   console.log(item[0].scrollHeight)
-                  
+               })
+
+
+               var _header = $("#header")
+               _header.click(function(event){
+                   console.log(event)
                })
               })
         </script>
