@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <style>
+            h1{
+                color:green;
+            }
+        </style>
+        <title>Hello, world!</title>
+    </head>
+
+    <body>
+        <!-- <h1 class="header">Hello, world!</h1>
+        <h1>Hello, world!</h1>
+        <h1 id="header-3">Hello, world!</h1>
+        <h1>Hello, world!</h1>
+        <h1>some other text!</h1> -->
+        <h1>Hello There!</h1>
+        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae rem atque suscipit molestias ullam quibusdam, asperiores labore quod culpa distinctio earum possimus similique modi unde eaque reprehenderit consequuntur libero voluptate? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa commodi maxime aut facere ea quia eveniet voluptates, nostrum et, recusandae cupiditate perspiciatis laborum sint! Cumque possimus vel consequuntur nulla perferendis.</p>
+
+        <p class="description">Testing some test some text some stuff some here some there some everywhere.</p>
+
+
+
+
+
+
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+
+
+        <script type="text/javaScript">
+            //$(document).ready(function(){// jquery is ready to roll
+                 //alert("Hello!")
+                // $(selector) - example of a selector
+                // $('body').css("background-color", "red")
+                //setTimeout(function(){
+                    // $('body').css("background-color", "red")
+                    //$('h1').css("color", "purple") // attribute, value
+                    //$('h1:nth-child(2)').text("Hello again!") // target second h1
+                    //$('#header-3').text("Hello again header 3!")
+                    //$(".header").css("background-color", "green").css("padding", "30px")
+               // }, 2000) // in ms
+              //})
+
+
+              $(document).ready(function(){// jquery is ready to roll
+                'use strict';
+               // var num = 123;
+                //var someString = "some string "
+                //var someArray = [num, 123, "and some on", 2, 6]
+
+                //$.each(someArray,function( index, obj){
+                    //console.log(index, obj)
+                    //if(obj % 2 == 0){
+                       // console.log(obj, " is even")
+                    //}else console.log(obj, " is not even")
+               // })
+               var $descriptionItems = $(".description") // since it is a class it turns it into an array
+               console.log($descriptionItems.length)
+               $.each($descriptionItems, function(index, obj){
+                   let item =$(this)
+                   let actualHeight= item[0].scrollHeight
+                   var shouldBeHeight = item.height() // here be dragons
+                  // console.log(index, obj) this ill render actual html
+                  //console.log(index, item.height()) // renders the height of in location
+                  // console.log(item)
+                  if(actualHeight < shouldBeHeight +100){
+                      item.css("overflow-y", "scroll")
+                  }
+                  console.log(item[0].scrollHeight)
+                  
+               })
+              })
+        </script>
+
+    </body>
+
+</html>
