@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import Cart
 
@@ -29,9 +30,17 @@ def cart_update(request):
             return redirect('cart:home')
         if product_obj in cart_obj.products.all():
             cart_obj.products.remove(product_obj)
+            added = False
         else:
             cart_obj.products.add(product_obj)
+            added = True
     request.session['cart_items'] = cart_obj.products.count()
+    if request.is_ajax():
+        json_data = {
+            "added": added,
+            "remove": not added, # always opposite so true or false
+        }
+        return JsonResponse(json_data)
     return redirect('cart:home')
 
 
