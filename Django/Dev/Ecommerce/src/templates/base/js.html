@@ -16,26 +16,61 @@
         
         productForm.submit(function(e){
             e.preventDefault();
-            console.log("Form is not sending")
+            //console.log("Form is not sending")
             let thisForm = $(this) // the form itself
             let actionURL= thisForm.attr('action')
+            let actionEndPoint = thisForm.attr('data-endpoint')
             let httpMethod = thisForm.attr('method')
             let formData = thisForm.serialize()
             $.ajax({
-                url:actionURL,
+                url:actionEndPoint,
                 method:httpMethod,
                 data:formData,
                 success:function(data){
                     let submitSpan = thisForm.find(".submit-span")
                     if(data.added){
                         submitSpan.html("In cart<button type='submit' class='btn btn-info'>Remove</button>")
-                    }else submitSpan.html("<button type='submit' class='btn btn-success'>Add to cart</button>")
+                    }else{
+                        submitSpan.html("<button type='submit' class='btn btn-success'>Add to cart</button>")
+                    }
+                    let navbarCount = $(".navbar-cart-count")
+                    navbarCount.text(data.cartItemCount) // updates cart icon
+                    let currentPath = window.location.href
+                    console.log(currentPath)
+                    if(currentPath.indexOf("cart")!= 1){ // if carts is in current path
+                        refreshCart()
+                    }
                 },error:function(errorData){
                     console.log("Error!")
                     console.log(errorData)
                 }
-            
+                
             })
         })
+        function refreshCart(){
+            console.log('In current Cart')
+            let cartTable = $(".cart-table")
+            let cartBody = cartTable.find(".cart-body")
+            cartBody.html("<h1>Changed<h1>")
+            
+            let refreshCartUrl = '/api/cart'
+            let refreshCartMethod = "GET"
+            let data = {}
+
+            $.ajax({
+                url: refreshCartUrl,
+                method:refreshCartMethod,
+                data:data,
+                success:function(data){
+                    console.log("Success")
+                    console.log(data)
+                    
+                },
+                error:function(errorData){
+                    console.log("Error")
+                    console.log(errorData)
+                }
+            })
+        }
     })
 </script>

@@ -38,7 +38,8 @@ def cart_update(request):
     if request.is_ajax():
         json_data = {
             "added": added,
-            "remove": not added, # always opposite so true or false
+            "remove": not added,  # always opposite so true or false
+            "cartItemCount": cart_obj.products.count()
         }
         return JsonResponse(json_data)
     return redirect('cart:home')
