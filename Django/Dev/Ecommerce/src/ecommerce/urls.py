@@ -21,6 +21,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
 
 from . import views
+# from ..apps.carts.views import cart_detail_api_view
 
 urlpatterns = [
     url(r'^$', views.home_page, name='home'),
@@ -32,8 +33,9 @@ urlpatterns = [
     url(r'^checkout/address/', include(('apps.addresses.urls', 'address'), namespace='address')),
     url(r'^accounts/', include(('apps.accounts.urls', 'account'), namespace='account')),
     url('admin/', admin.site.urls),
-    # Test pages
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    # API
+    url(r'^api/cart/',include(('apps.carts.urls', 'cart'), namespace='api-cart')),
 ]
 
 
