@@ -11,6 +11,7 @@
           <p class="card-text">{{ instance.description |truncatewords:12 }}.</p>
           <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a>
           <a href="{% url 'products:detail' slug=instance.slug %}" class="btn btn-success">URL Shortcut</a>
+          {% include 'products/snippets/update-cart.html' with product=instance cart=cart %}
         </div>
 </div>
 
