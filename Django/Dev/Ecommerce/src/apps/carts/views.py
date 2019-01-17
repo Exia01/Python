@@ -14,7 +14,7 @@ from ..addresses.forms import AddressForm
 
 
 def cart_detail_api_view(request):
-    cart_obj, new_obj = Cart.objects.new_or_get(request)
+    cart_obj, new_obj = Cart.objects.new_or_get(request) # implement value_list()
     products = [{
         "name": x.title,
         "price": x.price,
@@ -54,6 +54,7 @@ def cart_update(request):
             "cartItemCount": cart_obj.products.count()
         }
         return JsonResponse(json_data)
+        # return JsonResponse({"message":"Error 400"}, status=400)
     return redirect('cart:home')
 
 
