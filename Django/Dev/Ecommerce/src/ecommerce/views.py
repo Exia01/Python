@@ -1,6 +1,7 @@
 from django.contrib.auth import (authenticate, login, get_user_model)
 from django.contrib.auth.views import LogoutView
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
 from .forms import ContactForm, LoginForm, RegisterForm
 
 
@@ -32,11 +33,12 @@ def contact_page(req):
     }
     if contact_form.is_valid():
         print(contact_form.cleaned_data)
-    # if req.method == 'POST':
-    #     # print(req.POST)
-    #     print(req.POST.get('full_name'))
-    #     print(req.POST.get('email'))
-    #     print(req.POST.get('content'))
+        if req.is_ajax():
+            return JsonResponse({"message":"Thank you"})
+    if contact_form.errors:
+        errors = contact_form.errors.as_json()
+        if req.is_ajax():
+            return HttpResponse(errors, status=400, content_type="application/json")
     return render(req, "contact/contact_page.html", context)
 
 

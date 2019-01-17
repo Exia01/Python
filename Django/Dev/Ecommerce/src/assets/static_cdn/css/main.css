@@ -1,3 +1,4 @@
-body{
-    color: lightgray
+.img-fluid {
+    max-width: 50%;
+    height: auto;
 }
