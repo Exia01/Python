@@ -6,8 +6,6 @@ $(document).ready(function () {
     let contactFormMethod = contactForm.attr("method")
     let contactFormEndpoint = contactForm.attr("action")
 
-    let contactFormSubmitBtn = contactForm.find("[type='submit']")
-    let contactFormSubmitBtnTxt = contactFormSubmitBtn.text()
 
     function displaySubmitting(submitBtn, defaultText, doSubmit) {
         if (doSubmit) {
