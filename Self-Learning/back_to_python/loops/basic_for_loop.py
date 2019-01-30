@@ -3,4 +3,4 @@
 # 	print(x*x)
 
 for letter in "coffee":
-	print(letter*10)
+	print(letter*2)
