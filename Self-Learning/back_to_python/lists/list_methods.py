@@ -1,9 +1,10 @@
 #methods and functions in python
 # these functions are specific to lists --> "lists methods "
 
-first_list = [1, 2, 3, 4]
+items = [1, 2, 3, 4, 'socks', 'vortex', 'socks', [1,2]]
 
-first_list.append(5)  # will add 5 to the end
+
+items.append(5)  # will add 5 to the end
 
 correct_list = [1, 2, 3, 4]
 correct_list.extend([5, 6])
