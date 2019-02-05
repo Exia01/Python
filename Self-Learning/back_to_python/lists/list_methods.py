@@ -15,3 +15,9 @@ list_inserting = [1, 2, 3, 4]
 list_inserting.insert(2, 'Ellow!')
 list_inserting.insert(len(list_inserting), "Last")
 print(list_inserting)
+
+
+#swapping values
+
+names = ["James", "Michelle"]
+names[0], names[1] = names[1], names[0]
