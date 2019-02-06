@@ -1,3 +1,4 @@
+# this will not be order specific when extracting data.
 instructor = {
     'name': 'John',
     'has_pets': False,
@@ -17,18 +18,14 @@ sample = dict(name='John',
               favorite_sport='Soccer!',
               test=[1, 2, 3, 4, 5],)
 
-print(sample)
 
-sample_name = instructor['name']  # if not found will print keyerror
-print(sample_name)
-age = "age"
-print(instructor[age])
+a = instructor.values()
+for value in instructor.values():
+    print(value)  # will print out all the values
+for keys in instructor.keys():
+    print(keys)  # will print out all the values
 
-artist = {
-    "first": "Neil",
-    "last": "Young",
-}
-first_name = artist['first']
-last_name = artist['last']
-full_name = first_name + " " + last_name
-fullName = f'{first_name} {last_name}'
+b = instructor.items()  # will print out a tuple list of keys and values 
+
+for k, v in sample.items():
+    print(k, v)
