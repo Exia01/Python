@@ -9,3 +9,12 @@ print(answer2)
 numbers = [x for x in range(1,101)]
 answer =  [num for num in numbers if num%12 == 0]
 print(answer)
+
+
+loop_count = 3
+answer = [[x for x in range(loop_count)] for i in range(loop_count)]
+print(answer)
+
+loop_count = 10
+answer = [[x for x in range(loop_count)] for i in range(loop_count)]
+print(answer)
