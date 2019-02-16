@@ -4,6 +4,7 @@ items = [1, 2, 3, 4, 'socks', 'vortex', 'socks', [1,2]]
 
 #add
 items.append(5)  # will add 5 to the end
+print(items)
 correct_list = [1, 2, 3, 4]
 correct_list.extend([5, 6])
 print(correct_list)
