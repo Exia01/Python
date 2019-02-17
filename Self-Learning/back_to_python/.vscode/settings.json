@@ -1,3 +1,7 @@
 {
-    "python.pythonPath": "C:\\Users\\sixgg\\Documents\\GitHub\\Python\\Django\\Dev\\Ecommerce\\venv\\scripts\\python.exe"
+    "python.pythonPath": "C:\\Users\\sixgg\\Documents\\GitHub\\Python\\Django\\Dev\\Ecommerce\\venv\\scripts\\python.exe",
+    "cSpell.words": [
+        "falsey",
+        "truthy"
+    ]
 }
