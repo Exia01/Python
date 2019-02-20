@@ -1,1 +1,1 @@
-Self practice and learning by various online documentation, videos, examples and book sources 
+Self practice and learning from various online documentation, videos, examples and book sources 
