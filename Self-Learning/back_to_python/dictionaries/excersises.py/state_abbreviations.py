@@ -14,6 +14,6 @@ print(combination)
 
 list1 = ["CA", "NJ", "RI"]
 list2 = ["California", "New Jersey", "Rhode Island"]
- 
+print(list(zip(list1, list2)))
 x = dict(zip(list1, list2))
 print(x)
