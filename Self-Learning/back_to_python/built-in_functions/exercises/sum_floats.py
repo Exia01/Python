@@ -10,4 +10,8 @@ def sum_floats(*args):
 #Test Cases
 
 print(sum_floats(1.5, 2.4, 'awesome', [], 1))# 3.9
-print(sum_floats(1,2,3,4,5))# 0 
+print(sum_floats(1, 2, 3, 4, 5))  # 0
+
+#Explanation:
+# First check to see if there are "any" float pass in the args through a loop. 
+#if there float we loop to find them and only add those, then returning it
