@@ -57,4 +57,4 @@ songs = [
 
 # To sort songs by playcount
 print(sorted(songs, key=lambda s: s['playcount']))
-print(sorted(songs, key=lambda s: s['playcount']), reversed="True")
+# print(sorted(songs, key=lambda s: s['playcount'], reversed="True"))
