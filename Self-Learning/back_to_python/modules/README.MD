@@ -1,0 +1,4 @@
+- Understanding what a module is
+- Understand how to create module
+- Use pip
+- Module Patterns
