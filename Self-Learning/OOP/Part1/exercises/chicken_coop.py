@@ -24,8 +24,8 @@ class Bird:
 
 class Chicken(Bird):
     def __init__(self, name, species, can_fly=False):
+        Bird.__init__(self, name, can_fly) # could also user super. 
         self.species = species
-        Bird.__init__(self, name, can_fly)
 
     def clucks(self):
         return "cluck cluck cluck"
