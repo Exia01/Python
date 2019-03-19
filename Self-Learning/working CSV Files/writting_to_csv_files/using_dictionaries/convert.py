@@ -12,7 +12,7 @@ with open(file) as f:
 	fighters = list(csv_reader)
 
 file = data_folder / "inches_fighters.csv"
-with open(file, "w") as f:
+with open(file, "r+") as f:
 	headers = ("Name","Country","Height")
 	csv_writer = DictWriter(f, fieldnames=headers)
 	csv_writer.writeheader() #writes the headers
@@ -22,3 +22,12 @@ with open(file, "w") as f:
 			"Country": f["Country"],
 			"Height": cm_to_in(f.get("Height (in cm)", 0.0))
 		})
+
+
+#Another way
+import csv
+ 
+def add_user(first_name, last_name):
+    with open("users.csv", "a") as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow([first_name, 
