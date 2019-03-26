@@ -14,6 +14,7 @@ def quotes_writer(quotes, csv_writer):
                 "bio_link": author_href,
                 "tags": categories
             })
-
+def authors_writer(author, csv_writer):
+    pass
 if __name__ == "__main__":
     quotes_writer(quote_block)  # prevents it from running at start
