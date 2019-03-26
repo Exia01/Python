@@ -37,9 +37,7 @@ print(data2)
 data = soup.find(id="first").find_next_sibling().find_next_sibling()  #does not give the new line
 
 data = soup.select("[data-example]")[1].find_previous_sibling()
-data = data2 = soup.find(class_="super-special").find_next_sibling(class_="special")
+data = soup.find(class_="super-special").find_next_sibling(class_="special")
 print(data)
 
 
-data = soup.find("h3").find_parent()
-print(data)
