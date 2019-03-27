@@ -29,22 +29,23 @@ with open(quotes_file, 'r', encoding='utf-8-sig') as f:
 
 
 with open(authors_bio, 'w', encoding='utf-8-sig') as csv_file:
-    # headers = ("name", "birth_date", "location", "trivia_info")
+    # headers = ("name", "dob_location", "trivia_info")
     # csv_writer = DictWriter(csv_file, fieldnames=headers, lineterminator="\n")
     # csv_writer.writeheader()
     for author in authors_list:
         author_name = author.get("author")
         if authors_dictionary.get(author_name) == 0: #true if 1
             site = author.get("bio_link")
+            
             data = requests.get(site)
             soup = BeautifulSoup(data.text, "html.parser")
-            author_details = soup.find("div", {"class":"author-details"})
-            # bod = soup.select('.author-born-date')
-            # bod_local = soup.select('.author-born-date').get_text()
-            print(bod)
+            bod = soup.find("div", {"class": "author-details"}).find_next().find_next().get_text().split(":")[1][1::]
+            trivia = soup.find("div", {"class":"author-description"}).get_text().strip("\n")
+            print(trivia)
             break
             # csv_writer.writerow({
-            #     "name": author_name,
+                # "name": author_name,
+                # "dob_location"
 
             # })
 
