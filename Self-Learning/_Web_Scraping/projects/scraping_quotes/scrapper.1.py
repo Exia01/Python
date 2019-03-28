@@ -8,7 +8,7 @@ from csv_writter import quotes_writer
 
 
 data_folder = Path(
-    r'C:\Users\sixgg\Documents\GitHub\Python\Self-Learning\_Web_Scraping\projects\refractor_craping_quotes\csv_files')
+    r'C:\Users\sixgg\Documents\GitHub\Python\Self-Learning\_Web_Scraping\projects\scraping_quotes\csv_files')
 filename = "quotes.csv"
 
 quotes_file = data_folder / filename
