@@ -12,7 +12,7 @@ def get_Jokes():
     while True:
         print("\nGive me a topic: ")
         search_term = input()
-        if search_term == "q" or search_term == "n":
+        if search_term == "q" or search_term == "n" or search_term =="quit":
             break
         try:
             if len(search_term) <= 0:
@@ -22,7 +22,7 @@ def get_Jokes():
             print("Would you like to try again? Y/N ")
             try_again = input().lower()
             # print('from try again', try_again)
-            if try_again == "n" or try_again == "q":
+            if try_again == "n" or try_again == "q" or try_again=="quit":
                 break
         else:
             data = request_jokes(search_term, joke_count)
